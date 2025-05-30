@@ -157,6 +157,23 @@ Keterangan:
 
 Penggunaan cosine similarity memungkinkan sistem rekomendasi untuk menghasilkan matriks kemiripan antar film berdasarkan genre, sehingga dapat memberikan rekomendasi film yang memiliki konten genre serupa dengan film yang disukai pengguna.
 
+### Collaborative Filtering dengan Nearest Neighbors dan Cosine Similarity
+
+Model **Nearest Neighbors** menggunakan metode *k-nearest neighbors* (KNN) untuk mencari film-film yang paling mirip berdasarkan pola rating pengguna. Data yang digunakan adalah **user-item matrix**, di mana setiap baris mewakili pengguna dan setiap kolom mewakili film, dengan nilai berupa rating yang diberikan pengguna.
+
+Pada model ini digunakan:
+
+- `metric='cosine'`: Menggunakan *cosine similarity* sebagai ukuran kemiripan antar film.  
+- `algorithm='brute'`: Melakukan pencarian jarak secara langsung (brute force), cocok untuk dataset berukuran sedang.  
+- `n_neighbors=11`: Mencari 11 tetangga terdekat, yaitu 10 film paling mirip plus film itu sendiri.  
+- `n_jobs=-1`: Memanfaatkan semua core CPU untuk mempercepat perhitungan.
+
+#### Cara Kerja Model
+
+1. Model mengambil **user-item matrix** yang sudah di-*transpose* sehingga baris mewakili film dan kolom mewakili pengguna (atau sebaliknya sesuai implementasi).  
+2. Untuk setiap film, model mencari film-film lain dengan **cosine similarity tertinggi** (pola rating pengguna yang mirip).  
+3. Film-film dengan nilai cosine similarity tertinggi direkomendasikan sebagai film yang mirip.
+
 ## Evaluation
 
 ### Content-Based Filtering
