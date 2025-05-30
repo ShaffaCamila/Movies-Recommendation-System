@@ -190,6 +190,8 @@ Penggunaan cosine similarity memungkinkan sistem rekomendasi untuk menghasilkan 
 
 Sistem rekomendasi berbasis **Content-Based Filtering dengan Cosine Similarity** bekerja **sangat baik** dalam kasus ini, karena mampu merekomendasikan film-film dengan **genre yang 100% cocok** dengan film pencarian. Hal ini menunjukkan bahwa metode ini efektif dalam menghasilkan rekomendasi berbasis kesamaan konten genre.
 
+---
+
 ### Collaborative Filtering
 
 ### 🎯 Objek Film Pencarian
