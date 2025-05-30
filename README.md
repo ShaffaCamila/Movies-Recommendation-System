@@ -69,7 +69,7 @@ Untuk memahami komposisi konten yang tersedia dalam dataset, langkah awal yang d
 
 Selain memahami jenis konten melalui genre, penting juga untuk meninjau bagaimana pengguna memberikan rating terhadap film. Rating merupakan komponen utama dalam pendekatan collaborative filtering karena model ini mengandalkan pola dan hubungan antar rating pengguna untuk merekomendasikan film. Oleh karena itu, memahami distribusi rating sangat penting untuk mengetahui kecenderungan pengguna dalam menilai film — apakah condong memberikan rating tinggi, rendah, atau tersebar merata Visualisasi distribusi rating dapat memberikan wawasan penting seperti adanya potensi bias (misalnya mayoritas rating tinggi), distribusi tidak seimbang, atau kelangkaan rating ekstrem. Informasi ini akan sangat berguna saat menyusun strategi preprocessing dan dalam membangun user-item matrix yang optimal untuk collaborative filtering.
 
-![alt text](images/rating.pngrating.png)
+![alt text](images/rating.png)
 
 ## Data Preparation
 
