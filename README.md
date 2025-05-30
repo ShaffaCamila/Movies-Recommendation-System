@@ -38,7 +38,7 @@ Untuk mencapai tujuan yang telah ditetapkan, proyek ini mengusulkan dua pendekat
 
 ## Data Understanding
 
-Dataset yang digunakan adalah "Movie Recommender Dataset" dari Kaggle ([movie recommender dataset](https://www.kaggle.com/datasets/gargmanas/movierecommenderdataset)) yang berisi tiga file utama:
+Dataset yang digunakan adalah "Movie Recommender Dataset" dari Kaggle ([movie recommender dataset](https://www.kaggle.com/datasets/gargmanas/movierecommenderdataset)) yang berisi 2 file:
 
 **movies.csv**
 
