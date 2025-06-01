@@ -48,6 +48,10 @@ File ini memuat informasi tentang film, termasuk judul dan genre dari masing-mas
 - `title` : Judul lengkap film beserta tahun rilisnya.
 - `genres` : Genre film yang ditulis dalam format string dan dipisahkan dengan tanda `|` jika memiliki lebih dari satu genre.
 
+Kondisi data:
+- Tidak terdapat duplikat berdasarkan movieId.
+- Tidak terdapat missing value di seluruh kolom.
+
 **ratings.csv**
 
 File ini berisi data interaksi pengguna dengan film, berupa rating yang diberikan. Terdapat **100,836 entri rating** dengan atribut sebagai berikut:
@@ -56,6 +60,10 @@ File ini berisi data interaksi pengguna dengan film, berupa rating yang diberika
 - `movieId` : ID film yang dirating oleh pengguna.
 - `rating` : Nilai rating yang diberikan pengguna terhadap film, berada pada skala **0.5 hingga 5**.
 - `timestamp` : Waktu ketika rating diberikan, dalam format UNIX timestamp.
+
+Kondisi data:
+- Tidak terdapat duplikat berdasarkan kombinasi userId dan movieId.
+- Tidak terdapat missing value di seluruh kolom.
 
 ---
 
@@ -157,6 +165,22 @@ Keterangan:
 
 Penggunaan cosine similarity memungkinkan sistem rekomendasi untuk menghasilkan matriks kemiripan antar film berdasarkan genre, sehingga dapat memberikan rekomendasi film yang memiliki konten genre serupa dengan film yang disukai pengguna.
 
+### 🎯 Rekomendasi Film Berdasarkan Cosine Similarity (Toy Story (1995))
+
+| No | Rekomendasi Film                                              | Cosine Similarity | Genre Rekomendasi                               | Precision Genre |
+|----|---------------------------------------------------------------|-------------------|--------------------------------------------------|-----------------|
+| 1  | Antz (1998)                                                   | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 2  | Toy Story 2 (1999)                                            | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 3  | Adventures of Rocky and Bullwinkle, The (2000)               | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 4  | Emperor's New Groove, The (2000)                              | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 5  | Monsters, Inc. (2001)                                         | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 6  | Wild, The (2006)                                              | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 7  | Shrek the Third (2007)                                        | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 8  | Tale of Despereaux, The (2008)                                | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 9  | Asterix and the Vikings (Astérix et les Vikings) (2006)       | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+| 10 | Turbo (2013)                                                  | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.0             |
+
+
 ### Collaborative Filtering dengan Nearest Neighbors dan Cosine Similarity
 
 Model **Nearest Neighbors** menggunakan metode *k-nearest neighbors* (KNN) untuk mencari film-film yang paling mirip berdasarkan pola rating pengguna. Data yang digunakan adalah **user-item matrix**, di mana setiap baris mewakili pengguna dan setiap kolom mewakili film, dengan nilai berupa rating yang diberikan pengguna.
@@ -174,76 +198,42 @@ Pada model ini digunakan:
 2. Untuk setiap film, model mencari film-film lain dengan **cosine similarity tertinggi** (pola rating pengguna yang mirip).  
 3. Film-film dengan nilai cosine similarity tertinggi direkomendasikan sebagai film yang mirip.
 
+#### 🔍 10 Film yang Mirip dengan Toy Story (1995)
+
+| No | movieId | Title                                                 | Similarity | Avg Rating |
+|----|---------|--------------------------------------------------------|------------|-------------|
+| 1  | 3114    | Toy Story 2 (1999)                                     | 0.572601   | 3.86        |
+| 2  | 480     | Jurassic Park (1993)                                   | 0.565637   | 3.75        |
+| 3  | 780     | Independence Day (a.k.a. ID4) (1996)                   | 0.564262   | 3.45        |
+| 4  | 260     | Star Wars: Episode IV - A New Hope (1977)             | 0.557388   | 4.23        |
+| 5  | 356     | Forrest Gump (1994)                                    | 0.547096   | 4.16        |
+| 6  | 364     | Lion King, The (1994)                                  | 0.541145   | 3.94        |
+| 7  | 1210    | Star Wars: Episode VI - Return of the Jedi (1983)     | 0.541089   | 4.14        |
+| 8  | 648     | Mission: Impossible (1996)                             | 0.538913   | 3.54        |
+| 9  | 1265    | Groundhog Day (1993)                                   | 0.534169   | 3.94        |
+| 10 | 1270    | Back to the Future (1985)                              | 0.530381   | 4.04        |
+
+
 ## Evaluation
 
 ### Content-Based Filtering
 
-### 🎯 Objek Film Pencarian: _Toy Story (1995)_
-
-**Genre Film Pencarian:** `Adventure | Animation | Children | Comedy | Fantasy`
-
----
-
-| No. | Rekomendasi Film                               | Cosine Similarity | Genre Rekomendasi                               | Precision Genre |
-| --- | ---------------------------------------------- | ----------------- | ----------------------------------------------- | --------------- |
-| 1   | Antz (1998)                                    | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy | 1.0             |
-| 2   | Toy Story 2 (1999)                             | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy | 1.0             |
-| 3   | Adventures of Rocky and Bullwinkle, The (2000) | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy | 1.0             |
-| 4   | Emperor's New Groove, The (2000)               | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy | 1.0             |
-| 5   | Monsters, Inc. (2001)                          | 1.0               | Adventure\|Animation\|Children\|Comedy\|Fantasy | 1.0             |
-
----
-
-### Insight:
-
-- **Cosine Similarity = 1.0**  
+- **Precision Similarity Score = 1.0**  
   Menunjukkan bahwa secara vektor genre, film-film rekomendasi **identik** dengan film pencarian.
 - **Precision Genre = 1.0**  
   Menunjukkan bahwa semua genre pada film pencarian juga **sepenuhnya terdapat** pada setiap film rekomendasi.
 
 ---
 
-### Kesimpulan:
-
-Sistem rekomendasi berbasis **Content-Based Filtering dengan Cosine Similarity** bekerja **sangat baik** dalam kasus ini, karena mampu merekomendasikan film-film dengan **genre yang 100% cocok** dengan film pencarian. Hal ini menunjukkan bahwa metode ini efektif dalam menghasilkan rekomendasi berbasis kesamaan konten genre.
-
----
-
 ### Collaborative Filtering
 
-### 🎯 Objek Film Pencarian
-
-- **Judul** : _Toy Story (1995)_
-- **Genre** : `Adventure | Animation | Children | Comedy | Fantasy`
-- **Rating** : 3.92
+Pada evaluasi model Collaborative Filtering berbasis K-Nearest Neighbors (KNN), dilakukan pengukuran performa menggunakan dua metrik utama, yaitu:
+- RMSE (Root Mean Squared Error): 2.1126
+- MAE (Mean Absolute Error): 1.73
 
 ---
 
-### 🔍 10 Film yang Mirip:
+## Kesimpulan
+Proyek ini berhasil membangun sistem rekomendasi film menggunakan metode Content-Based Filtering dan Collaborative Filtering dengan data MovieLens 100K. Metode content-based menunjukkan hasil baik dalam merekomendasikan film berdasarkan kemiripan genre, sementara collaborative filtering mampu menangkap preferensi pengguna melalui pola rating, meskipun hasil evaluasinya (RMSE 2.11 dan MAE 1.73) menunjukkan masih adanya ruang untuk perbaikan.
 
-| No. | Judul Film                                        | Cosine Similarity | Rata-Rata Rating |
-| --- | ------------------------------------------------- | ----------------- | ---------------- |
-| 1   | Toy Story 2 (1999)                                | 0.5726            | 3.86             |
-| 2   | Jurassic Park (1993)                              | 0.5656            | 3.75             |
-| 3   | Independence Day (a.k.a. ID4) (1996)              | 0.5643            | 3.45             |
-| 4   | Star Wars: Episode IV - A New Hope (1977)         | 0.5574            | 4.23             |
-| 5   | Forrest Gump (1994)                               | 0.5471            | 4.16             |
-| 6   | The Lion King (1994)                              | 0.5411            | 3.94             |
-| 7   | Star Wars: Episode VI - Return of the Jedi (1983) | 0.5411            | 4.14             |
-| 8   | Mission: Impossible (1996)                        | 0.5389            | 3.54             |
-| 9   | Groundhog Day (1993)                              | 0.5342            | 3.94             |
-| 10  | Back to the Future (1985)                         | 0.5304            | 4.04             |
-
----
-
-### Insight:
-
-- Film-film rekomendasi memiliki **kemiripan perilaku penilaian (rating)** dengan _Toy Story (1995)_, meskipun tidak semua memiliki genre yang identik.
-- **Similarity di kisaran ~0.53 - 0.57** menunjukkan bahwa film-film ini memiliki **pola rating dari pengguna yang cukup mirip** dengan _Toy Story_.
-- Collaborative Filtering fokus pada **pola kesamaan antar pengguna**, bukan isi konten film.
-
----
-
-### Kesimpulan:
-
-Sistem **Collaborative Filtering** mampu memberikan rekomendasi berdasarkan **kesamaan preferensi pengguna**, bukan hanya konten film. Hal ini terlihat dari munculnya film-film populer lintas genre yang cenderung disukai oleh pengguna yang juga menyukai _Toy Story_. Meskipun beberapa film tidak satu genre, kemiripan rating oleh pengguna menjadi dasar utama sistem ini dalam memberikan rekomendasi.
+Secara keseluruhan, kedua pendekatan memiliki kelebihan dan kekurangannya masing-masing. Untuk hasil yang lebih akurat dan personal, sistem rekomendasi ini berpotensi ditingkatkan dengan pendekatan hybrid dan pemanfaatan fitur tambahan seperti data aktor, sutradara, atau ulasan pengguna.
